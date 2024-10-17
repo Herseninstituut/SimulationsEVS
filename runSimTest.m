@@ -1,11 +1,8 @@
 %% load data
-strConnOld = 'Conn256N1200_2020-10-29.mat'; %old
-strConnNew = strConnOld; %new
-%strConnNew = 'Conn256N1200_2021-01-08.mat'; %new
-strStimOld = 'Ret256Noise0.0Ori5_x2R1_2020-07-17.mat'; %old
-strStimNew = 'Ret256Noise0.0Ori5_x2R1_2020-07-17.mat'; %new
-load(['F:\Code\Simulations\SimulationsEVS\Connectivity\' strConnNew ]);
-load(['F:\Code\Simulations\SimulationsEVS\Stimulation\' strStimNew]);
+strConnNew = 'Conn256N1200.mat'; 
+strStimNew = 'Ret256Noise1.0Ori160_x9R1.mat'; 
+load(fullfile('Connectivity', strConnNew ));
+load(fullfile('Stimulation', strStimNew));
 
 %% plot response of example cell
 intNeuron=320;
