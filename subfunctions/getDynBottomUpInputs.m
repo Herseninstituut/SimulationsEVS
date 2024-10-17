@@ -61,8 +61,8 @@ function sStimDrive = getDynBottomUpInputs(sStimParams,intStimType)
 	%% build square-wave grating
 	if intStimType == -1
 		%build Acquivis stimulus
-		error this is not finished yet
-		matImageRGB = buildGratingTexture(sGratingObject,matMapDegsXY)
+		error('this is not finished yet');
+		% matImageRGB = buildGratingTexture(sGratingObject,matMapDegsXY)
 		
 		
 	elseif intStimType == 1

@@ -116,8 +116,8 @@ else
 		sConnParams.intColumns,sConnectivity.intCortexCells,numel(sConnectivity.vecSynExcInh),...
 		sConnParams.boolUseWeights,sConnParams.boolUseRFs,sConnParams.boolUseSFs,getDate);
 end
-strConnFile = sprintf('Conn%dN%d_%s.mat',...
-		sConnParams.vecSizeInput(1),sConnectivity.intCortexCells,getDate);
+strConnFile = sprintf('Conn%dN%d.mat',...
+		sConnParams.vecSizeInput(1),sConnectivity.intCortexCells);
 	
 strConnDir = fullfile(strHome,'Connectivity');
 

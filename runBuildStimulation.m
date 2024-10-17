@@ -117,8 +117,11 @@ sStimParams.vecTemporalFrequencies = 1; %Temporal frequency in cycles per second
 [sStimParams,sStimObject,sStimTypeList] = getDriftingGratingCombos(sStimParams);
 %}
 %% save
-strStimFile = sprintf('%s_x%dR%d_%s.mat',sStimParams.strStimTag,numel(sStimInputs.vecTrialStimType),max(sStimInputs.vecTrialStimRep),getDate);
+%strStimFile = sprintf('%s_x%dR%d_%s.mat',sStimParams.strStimTag,numel(sStimInputs.vecTrialStimType),max(sStimInputs.vecTrialStimRep),getDate);
+strStimFile = sprintf('%s_x%dR%d.mat',sStimParams.strStimTag,numel(sStimInputs.vecTrialStimType),max(sStimInputs.vecTrialStimRep));
 
 fprintf('Saving file [%s] to [%s]... [%s]\n',strStimFile,strStimDir,getTime);
 save(fullfile(strStimDir,strStimFile),'sStimParams','sStimInputs');
+fprintf('Done! [%s]\n',getTime);
+
 end

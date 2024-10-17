@@ -119,7 +119,10 @@ sData.cellSpikeTimesLGN_OFF = cellSpikeTimesTemp;
 
 %% save data
 if nargout == 0
-	strDataFile = [strOutputDir 'Simulation_'  getFlankedBy(mfilename,'_',[]) sStimParams.strStimType sprintf('%s.mat',getDate)];
+    strHome = mfilename('fullpath');
+    strHome = strHome(1:(end-length(mfilename)));
+    strOutputDir = [strHome 'SimResults' filesep];
+    strDataFile = [strOutputDir 'Simulation_'  getFlankedBy(mfilename,'_',[]) sStimParams.strStimType sprintf('%s.mat',getDate)];
 	printf(' .. Saving data to <%s>... [%s]\n',strDataFile,getTime);
 	save(strDataFile,'sData','sStimInputs','sStimParams');
 	printf(' .. Data saved! [%s]\n',getTime);
