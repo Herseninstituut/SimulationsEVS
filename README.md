@@ -62,7 +62,7 @@ At the MATLAB prompt:
 
     runBuildConnectivity
     runBuildStimulation
-    runSimulation('indret=0,time=0:5:10,conn=Conn256N1200_2024-10-16.mat,stim=Ret256Noise1.0Ori160_x9R1_2024-10-16.mat,idx=1,att=0_2,tag=SmallExample')
+    runSimulation('indret=0,time=0:5:10,conn=Conn256N1200.mat,stim=Ret256Noise1.0Ori160_x9R1.mat,idx=1,att=0_2,tag=SmallExample')
 
 to run the example simulation. See help runSimulation for details on the arguments.
 For the small example on a 9th Gen Intel Core i5 desktop PC, 
