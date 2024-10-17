@@ -58,9 +58,7 @@ information.
 
 ## Demo
 
-runBuildConnectivity is set for a small example run. To run a larger example,\
-set boolUseSmallExample = false in line 14 of runBuildConnectivity. At the
-MATLAB prompt:
+At the MATLAB prompt:
 
     runBuildConnectivity
     runBuildStimulation
@@ -69,7 +67,9 @@ MATLAB prompt:
 to run the example simulation. See help runSimulation for details on the arguments.
 For the small example on a 9th Gen Intel Core i5 desktop PC, 
 runBuildConnectivity takes 18 s, runBuildStimulation takes 52 s, and 
-runSimulation takes 18 s, plus 40 s for saving the data.
+runSimulation takes 18 s, plus 40 s for saving the data. runBuildConnectivity 
+is set for only a small example run. To run a larger example,
+set boolUseSmallExample = false in line 14 of runBuildConnectivity. 
 
 ## Author
 
