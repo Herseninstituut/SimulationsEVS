@@ -11,12 +11,18 @@
 %Version History:
 %2019-02-12 Updated name and help description [by Jorrit Montijn]
 
+boolUseSmallExample = true;
+
+%% add paths
+strHome = fileparts(mfilename('fullpath'));
+addpath(fullfile(strHome,'classics'), fullfile(strHome,'subfunctions'), fullfile(strHome,'general'));
 
 %% msg
 fprintf('Starting offline construction of connectivity profile... [%s]\n\n',getTime);
 
 %% set connectivity parameters
 sConnParams = struct;
+
 sConnParams.intCellsV1 = 1200;
 sConnParams.vecSizeInput = [256 256];
 sConnParams.dblVisSpacing = 6.4/sConnParams.vecSizeInput(1);
@@ -30,18 +36,25 @@ sConnParams.boolUseSFs = true;
 sConnParams.vecConnsPerTypeON = [2880 1920]; %[pyramid interneuron]
 sConnParams.vecConnsPerTypeOFF = [2880 1920]; %[pyramid interneuron]
 
+if boolUseSmallExample
+    % sConnParams.intCellsV1 = 1200;
+    % sConnParams.vecSizeInput = [5 5];
+    % sConnParams.boolUseSFs = false;
+    sConnParams.vecConnsPerTypeON = [72 48]/12; %[pyramid interneuron]
+    sConnParams.vecConnsPerTypeOFF = [72 48]/12; %[pyramid interneuron]
+end
+
 sConnParams.dblSigmaW = 0.8;%1.29; %width of gabor response
 sConnParams.dblSigmaL = sConnParams.dblSigmaW/5;%1.29; %length of gabor response
 sConnParams.vecConductance_FromLGN_ToCort = [6.9 8.15]*(10^-3);%[7.1 8.3]*(10^-3); %to [pyramid interneuron]
 sConnParams.vecMeanSynDelayFromLGN_ToCort = [10 5]/1000; %to [pyramid interneuron]
 sConnParams.vecSDSynDelayFromLGN_ToCort = [7 3]/1000; %to [pyramid interneuron]
 
-
 %V1 def
 if sConnParams.boolUseSFs
 	sConnParams.vecDefinitionV1SpatFreq = 8*(2.^[-4 -3 -2 -1 0]);%2.^[-3:1:1];
 else
-	sConnParams.vecDefinitionV1SpatFreq = 8*(2.^[-2]);%2.^[-3:1:1];
+	sConnParams.vecDefinitionV1SpatFreq = 8*(2.^-2);%2.^[-3:1:1];
 end
 sConnParams.vecDefinitionV1CellTypes = [1 1 1 1 2]; %[1=pyramid 2=interneuron]
 sConnParams.intColumns = sConnParams.intCellsV1 / (numel(sConnParams.vecDefinitionV1SpatFreq) * numel(sConnParams.vecDefinitionV1CellTypes)); %48 / 252 / 120 / 600
@@ -92,6 +105,7 @@ sConnParams.dblDelaySDV1ToV2 = 1/1000; %in ms
 sConnectivity = buildConnectivity(sConnParams);
 
 %% save
+
 if sConnParams.boolUseRFs && sConnParams.boolUseSFs && ~sConnParams.boolUseWeights
 	strConnFile = sprintf('sConnSimilX_Ret%dCol%dN%dS%d_%s.mat',...
 		sConnParams.vecSizeInput(1),sConnParams.intColumns,sConnectivity.intCortexCells,...
@@ -105,10 +119,10 @@ end
 strConnFile = sprintf('Conn%dN%d_%s.mat',...
 		sConnParams.vecSizeInput(1),sConnectivity.intCortexCells,getDate);
 	
-strConnDir = 'F:\Code\Simulations\SimulationsEVS\Connectivity\';
+strConnDir = fullfile(strHome,'Connectivity');
 
 fprintf('Saving file [%s] to [%s]... [%s]\n',strConnFile,strConnDir,getTime);
-save([strConnDir strConnFile],'sConnParams','sConnectivity');
+save(fullfile(strConnDir,strConnFile),'sConnParams','sConnectivity');
 fprintf('Done! [%s]\n',getTime);
 
 %%

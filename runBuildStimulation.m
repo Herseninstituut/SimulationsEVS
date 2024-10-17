@@ -9,14 +9,18 @@
 %NOTE: I'm planning to update the stimulation scripts to use the same
 %functions as I use for creating an actual visual stimulus
 %
-%Version History:
-%2019-02-12 Updated name and help description [by Jorrit Montijn]
 
 %% msg
-clearvars;
+% clearvars;
+
 fprintf('Starting offline construction of stimulus profile... [%s]\n\n',getTime);
-%dblNoise = 0;
 vecNoise = 0:0.2:3;
+
+if exist('boolUseSmallExample','var') && boolUseSmallExample
+    vecNoise = 0.8:0.2:1.2;
+end
+
+
 for dblNoise=vecNoise
 
 %% prepare stimulus list
@@ -47,7 +51,9 @@ sStimParams.intReps = 1; %number of repetitions
 sStimParams.dblStimSizeRetDeg = 5; %diameter
 sStimParams.vecScrPixWidthHeight = [256 256];
 sStimParams.vecScrDegWidthHeight = [6.4 6.4];
-sStimParams.strStimDriveDir = 'F:\Code\Simulations\SimulationsEVS\Stimulation\';
+strHome = fileparts(mfilename('fullpath'));
+strStimDir = fullfile(strHome,'Stimulation');
+sStimParams.strStimDriveDir = [strStimDir filesep];
 sStimParams.boolUseAllCombs = true;%false
 
 %% build stimuli
@@ -112,8 +118,7 @@ sStimParams.vecTemporalFrequencies = 1; %Temporal frequency in cycles per second
 %}
 %% save
 strStimFile = sprintf('%s_x%dR%d_%s.mat',sStimParams.strStimTag,numel(sStimInputs.vecTrialStimType),max(sStimInputs.vecTrialStimRep),getDate);
-strStimDir = 'F:\Code\Simulations\SimulationsEVS\Stimulation\';
 
 fprintf('Saving file [%s] to [%s]... [%s]\n',strStimFile,strStimDir,getTime);
-save([strStimDir strStimFile],'sStimParams','sStimInputs');
+save(fullfile(strStimDir,strStimFile),'sStimParams','sStimInputs');
 end

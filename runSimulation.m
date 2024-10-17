@@ -40,6 +40,7 @@
 
 function [sData,sSimRun] = runSimulation(strInput)
 	%strInput = 'indret=0,time=1,conn=sConnSimil2_Ret32Col180N4800S1397760_2018-04-09.mat,stim=sStim2_SquareGratingExpRet32Noise0Ori5Drift2_x2R1_2018-07-16.mat,idx=1,att=0_2,tag=C2IndepRetOri2Noise0';
+    %strInput = 'indret=0,time=0:0:25,conn=Conn256N1200_2024-10-16.mat,stim=Ret256Noise0.0Ori160_x9R1_2024-10-16.mat,idx=1,att=0_2,tag=Alex20241016';
 	
 	hTic = tic;
 	%% set log path
@@ -53,19 +54,16 @@ function [sData,sSimRun] = runSimulation(strInput)
 	if ~boolClust && ispc
 		%add directories to paths
 		strHome = mfilename('fullpath');
-		if isempty(strHome) || strcmp(strHome(1),'C')
-			strHome='F:\Code\Simulations\SimulationsEVS\';
-		else
-			strHome = strHome(1:(end-length(mfilename)));
-		end
+        strHome = strHome(1:(end-length(mfilename)));
 		strLogDir = [strHome 'logs' filesep];
-		strOutputDir = ['F:\Data\Results\SimResults' filesep];
+		strOutputDir = [strHome 'SimResults' filesep];
 		strStimDir = [strHome 'Stimulation' filesep];
 		strConnDir = [strHome 'Connectivity' filesep];
 		boolClust = false;
 	else
 		%add directories to paths
-		strHome = [filesep 'home' filesep 'users' filesep 'm' filesep 'montijn' filesep 'SimulationsEVS' filesep];
+        strHome = mfilename('fullpath');
+        strHome = strHome(1:(end-length(mfilename)));
 		strLogDir = [strHome 'logs' filesep];
 		strOutputDir = [strHome 'SimResults' filesep];
 		strStimDir = [strHome 'Stimulation' filesep];
